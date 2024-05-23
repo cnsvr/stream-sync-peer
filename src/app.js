@@ -2,7 +2,15 @@ const { PeerServer } = require("peer");
 
 const port = process.env.PORT || 3000;
  // Peer Server
- const peerServer = PeerServer({ port: port, path: "/myapp" });
+ const peerServer = PeerServer({ 
+  port: port,
+  path: "/myapp",
+  config: {
+    iceServers: [
+      { urls: ["stun:stun.l.google.com:19302", "stun:stun1.l.google.com:19302"] },
+    ],
+  },
+});
  
  peerServer.on("connection", (client) => {
    console.log("Client connected", client.getId());
