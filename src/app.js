@@ -3,7 +3,6 @@ const { PeerServer } = require("peer");
 const port = process.env.PORT || 3000;
 
 const iceServers = [
-
   {
         "urls": "stun:stun.relay.metered.ca:80"
   },
@@ -33,10 +32,7 @@ const iceServers = [
  // Peer Server
  const peerServer = PeerServer({ 
   port: port,
-  path: "/myapp",
-  config: {
-    iceServers: iceServers
-  },
+  path: "/myapp"
 });
  
  peerServer.on("connection", (client) => {
