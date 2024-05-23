@@ -32,7 +32,10 @@ const iceServers = [
  // Peer Server
  const peerServer = PeerServer({ 
   port: port,
-  path: "/myapp"
+  path: "/myapp",
+  config: {
+    iceServers: iceServers
+  }
 });
  
  peerServer.on("connection", (client) => {
