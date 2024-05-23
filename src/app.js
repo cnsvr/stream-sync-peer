@@ -3,11 +3,29 @@ const { PeerServer } = require("peer");
 const port = process.env.PORT || 3000;
 
 const iceServers = [
-  { urls: 'stun:freeturn.net:5349' },
+
   {
-    urls: 'turns:freeturn.tel:5349',
-    username: 'free',
-    credential: 'free'
+        "urls": "stun:stun.relay.metered.ca:80"
+  },
+  {
+        "urls": "turn:global.relay.metered.ca:80",
+        "username": "1f56d8c725879fb3809563fa",
+        "credential": "7QNpUd1kXOjtpK9/"
+  },
+  {
+        "urls": "turn:global.relay.metered.ca:80?transport=tcp",
+        "username": "1f56d8c725879fb3809563fa",
+        "credential": "7QNpUd1kXOjtpK9/"
+  },
+  {
+        "urls": "turn:global.relay.metered.ca:443",
+        "username": "1f56d8c725879fb3809563fa",
+        "credential": "7QNpUd1kXOjtpK9/"
+  },
+  {
+        "urls": "turns:global.relay.metered.ca:443?transport=tcp",
+        "username": "1f56d8c725879fb3809563fa",
+        "credential": "7QNpUd1kXOjtpK9/"
   }
 ];
 
