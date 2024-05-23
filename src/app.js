@@ -7,9 +7,12 @@ const port = process.env.PORT || 3000;
   path: "/myapp",
   config: {
     iceServers: [
-      { urls: ["stun:stun.l.google.com:19302", "stun:stun1.l.google.com:19302"] },
-    ],
-  },
+      { urls: 'stun:stun.l.google.com:19302' },
+      {
+        urls: 'turn:turn02.hubl.in?transport=tcp'
+      }
+    ]
+  }
 });
  
  peerServer.on("connection", (client) => {
