@@ -1,18 +1,24 @@
 const { PeerServer } = require("peer");
 
 const port = process.env.PORT || 3000;
+
+const iceServers = [
+  { urls: 'stun:freeturn.net:5349' },
+  {
+    urls: 'turns:freeturn.tel:5349',
+    username: 'free',
+    credential: 'free'
+  }
+];
+
+
  // Peer Server
  const peerServer = PeerServer({ 
   port: port,
   path: "/myapp",
   config: {
-    iceServers: [
-      { urls: 'stun:stun.l.google.com:19302' },
-      {
-        urls: 'turn:turn02.hubl.in?transport=tcp'
-      }
-    ]
-  }
+    iceServers: iceServers
+  },
 });
  
  peerServer.on("connection", (client) => {
