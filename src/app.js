@@ -1,24 +1,28 @@
-const { PeerServer } = require("peer");
+require("dotenv").config();
 
-const port = process.env.PORT || 3000;
+const { ExpressPeerServer } = require("peer");
+const express = require("express");
 
- // Peer Server
-const peerServer = PeerServer({ 
-  port: port,
-  path: "/myapp",
+const http = require("http");
+
+const app = express();
+
+const server = http.createServer(function (req, res) {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("Hello world!");
+});
+
+const PORT = 9000;
+
+app.use(express.static("public"));
+
+const peerServer = ExpressPeerServer(server, {
+  debug: true,
   allow_discovery: true,
 });
- 
- peerServer.on("connection", (client) => {
-   console.log("Client connected", client.getId());
- });
 
-peerServer.on("disconnect", (client) => {
-    console.log("Client disconnected", client.getId());
+app.use("/myapp", peerServer);
+
+server.listen(PORT, () => {
+  console.log(`PeerJS server running on port ${PORT}`);
 });
-
-peerServer.on("error", (error) => {
-    console.log("Error", error);
-});
-
-
